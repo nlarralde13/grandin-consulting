@@ -1,11 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import FeatureGrid from "../components/FeatureGrid.jsx";
+import PartnerStrip from "../components/PartnerStrip.jsx";
+import StatsRow from "../components/StatsRow.jsx";
+import CTABand from "../components/CTABand.jsx";
 
 const heroLogos = [
   { src: "/images/logo_transparent.png", alt: "Grandin Consulting badge" },
   { src: "/images/logo_white_background.png", alt: "Grandin Consulting full logo" },
 ];
+const heroBadgeLogo = "/images/logo_white_background.png";
 
 export default function Home({ onGetConsultation }) {
   return (
@@ -52,7 +56,14 @@ export default function Home({ onGetConsultation }) {
             </div>
           </div>
 
-          <div className="hero__right" aria-hidden="true">
+          <div className="hero__right">
+            <div className="hero-logo-badge">
+              <img src={heroBadgeLogo} alt="Grandin Consulting emblem" />
+              <div>
+                <p className="hero-logo-badge__eyebrow">Your Modern IT Ally</p>
+                <p className="hero-logo-badge__title">Grandin Consulting</p>
+              </div>
+            </div>
             <div className="hero-illustration" role="img" aria-label="">
               <div className="illus-card"><span>Wi-Fi</span></div>
               <div className="illus-card"><span>Identity</span></div>
@@ -62,6 +73,9 @@ export default function Home({ onGetConsultation }) {
           </div>
         </div>
       </section>
+
+      <PartnerStrip />
+      <StatsRow />
 
       {/* SERVICES SECTION (separate from hero) */}
       <section aria-labelledby="services-overview-title" className="section services-overview">
@@ -90,6 +104,7 @@ export default function Home({ onGetConsultation }) {
           </div>
         </div> */}
       </section>
+      <CTABand />
     </>
   );
 }
