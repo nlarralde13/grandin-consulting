@@ -17,7 +17,7 @@ export default function Schedule() {
           loading="lazy"
         />
         <p className="muted xs" style={{ padding: "10px 16px" }}>
-          Prefer email? <a href="mailto:hello@grandin.consulting">hello@grandin.consulting</a>
+          Prefer email? <a href="mailto:info@grandinconsulting.com">hello@grandinconsulting.com</a>
         </p>
       </div>
     </main>

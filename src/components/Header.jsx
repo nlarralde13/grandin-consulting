@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
-const LOGO_SRC = "/images/logo_transparent.png";
+const LOGO_SRC = "/images/logo_white_background.png";
 
 export default function Header({ tabs, activeId, onTabChange, tabRefs }) {
   const listRef = useRef(null);

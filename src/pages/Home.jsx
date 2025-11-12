@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import FeatureGrid from "../components/FeatureGrid.jsx";
 import PartnerStrip from "../components/PartnerStrip.jsx";
@@ -10,6 +10,35 @@ const heroLogos = [
   { src: "/images/logo_white_background.png", alt: "Grandin Consulting full logo" },
 ];
 const heroBadgeLogo = "/images/logo_white_background.png";
+const heroTiles = [
+  { title: "Wi-Fi", summary: "Mesh Wi-Fi tuned for density and roaming with built-in health alerts." },
+  { title: "Identity", summary: "Modern identity that unifies SSO, MFA, and lifecycle automation." },
+  { title: "Backups", summary: "Policy-driven backups with immutable storage and quarterly tests." },
+  { title: "Cloud", summary: "Right-sized cloud foundations with cost guardrails and telemetry." },
+];
+
+function HeroFlipCard({ title, summary }) {
+  const [flipped, setFlipped] = useState(false);
+  return (
+    <button
+      type="button"
+      className={`hero-flip-card${flipped ? " is-flipped" : ""}`}
+      onClick={() => setFlipped((state) => !state)}
+      aria-pressed={flipped}
+    >
+      <span className="hero-flip-card__inner">
+        <span className="hero-flip-card__face hero-flip-card__face--front">
+          {title}
+        </span>
+        <span className="hero-flip-card__face hero-flip-card__face--back">
+          <strong>{title}</strong>
+          <p>{summary}</p>
+          <span className="hero-flip-card__hint">Tap to flip back</span>
+        </span>
+      </span>
+    </button>
+  );
+}
 
 export default function Home({ onGetConsultation }) {
   return (
@@ -64,11 +93,10 @@ export default function Home({ onGetConsultation }) {
                 <p className="hero-logo-badge__title">Grandin Consulting</p>
               </div>
             </div>
-            <div className="hero-illustration" role="img" aria-label="">
-              <div className="illus-card"><span>Wi-Fi</span></div>
-              <div className="illus-card"><span>Identity</span></div>
-              <div className="illus-card"><span>Backups</span></div>
-              <div className="illus-card"><span>Cloud</span></div>
+            <div className="hero-illustration" aria-label="Core managed IT solutions">
+              {heroTiles.map((tile) => (
+                <HeroFlipCard key={tile.title} title={tile.title} summary={tile.summary} />
+              ))}
             </div>
           </div>
         </div>

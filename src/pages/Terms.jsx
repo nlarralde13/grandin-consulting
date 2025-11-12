@@ -16,7 +16,7 @@ export default function Terms() {
       <p>To the extent permitted by law, we aren’t liable for indirect or incidental damages.</p>
 
       <h3>Contact</h3>
-      <p>Questions: <a href="mailto:hello@grandin.consulting">hello@grandin.consulting</a>.</p>
+      <p>Questions: <a href="mailto:info@grandinconsulting.com">info@grandinconsulting.com</a>.</p>
     </main>
   );
 }

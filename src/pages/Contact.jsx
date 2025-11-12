@@ -106,7 +106,7 @@ export default function Contact({ onSuccess }) {
         </div>
 
         <p className="muted xs">
-          Prefer email? <a href="mailto:hello@grandin.consulting">hello@grandin.consulting</a>
+          Prefer email? <a href="mailto:info@grandinconsulting.com">hello@grandinconsulting.com</a>
         </p>
       </form>
     </>

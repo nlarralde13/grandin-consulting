@@ -19,7 +19,7 @@ export default function Privacy() {
       <p>We apply reasonable technical and organizational measures appropriate for SMBs.</p>
 
       <h3>Your choices</h3>
-      <p>Contact <a href="mailto:privacy@grandin.consulting">privacy@grandin.consulting</a> for access or deletion.</p>
+      <p>Contact <a href="mailto:privacy@grandinconsulting.com">privacy@grandinconsulting.com</a> for access or deletion.</p>
     </main>
   );
 }
