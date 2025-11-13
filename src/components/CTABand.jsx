@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { CALENDLY_OR_FORM_URL, PHONE_NUMBER_DISPLAY, PHONE_NUMBER_TEL } from "../config/siteMeta.js";
 
 export default function CTABand() {
   return (
@@ -10,8 +10,10 @@ export default function CTABand() {
           <p className="muted">We’ll map a clear path—from today’s pain points to tomorrow’s reliable systems.</p>
         </div>
         <div className="cta-actions">
-          <Link className="btn btn-primary btn-lg" to="/schedule">Book a Consultation</Link>
-          <Link className="btn btn-outline btn-lg" to="/#contact">Contact Sales</Link>
+          <a className="btn btn-primary btn-lg" href={CALENDLY_OR_FORM_URL} rel="noopener">Book a 15-minute Fit Call</a>
+          <a className="btn btn-outline btn-lg" href={PHONE_NUMBER_TEL} aria-label={`Call ${PHONE_NUMBER_DISPLAY}`}>
+            Call {PHONE_NUMBER_DISPLAY}
+          </a>
         </div>
       </div>
     </section>

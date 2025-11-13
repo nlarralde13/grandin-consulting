@@ -54,7 +54,7 @@ function Icon({ name, size = 28 }) {
   }
 }
 
-export default function FeatureTile({ icon, title, lines = [], to = "/", cta = "Learn more" }) {
+export default function FeatureTile({ icon, title, lines = [], outcome, to = "/", cta = "Learn more" }) {
   return (
     <article className="feature-tile">
       <div className="feature-icon" aria-hidden="true"><Icon name={icon} /></div>
@@ -62,6 +62,7 @@ export default function FeatureTile({ icon, title, lines = [], to = "/", cta = "
       <ul className="feature-lines">
         {lines.map((l) => <li key={l}>{l}</li>)}
       </ul>
+      {outcome && <p className="feature-outcome">{outcome}</p>}
       <div className="feature-cta">
         <Link to={to} className="micro-cta" aria-label={`${cta}: ${title}`}>{cta} →</Link>
       </div>

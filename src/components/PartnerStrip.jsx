@@ -22,7 +22,7 @@ export default function PartnerStrip() {
         <div className="partner-rail">
           {logos.map((logo) => (
             <div className="partner-item" key={logo.alt}>
-              <img className="partner-logo" src={logo.src} alt={logo.alt} />
+              <img className="partner-logo img-safe" src={logo.src} alt={logo.alt} />
             </div>
           ))}
         </div>

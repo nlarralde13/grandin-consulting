@@ -1,11 +1,12 @@
 import React from "react";
+import { PHONE_NUMBER_DISPLAY, PHONE_NUMBER_TEL } from "../config/siteMeta.js";
 
 export default function TopBar() {
   return (
     <div className="topbar">
       <div className="container topbar__inner">
         <div className="topbar__left">
-          <a href="tel:+1-555-555-1234" className="topbar__link">📞 (555) 555-1234</a>
+          <a href={PHONE_NUMBER_TEL} className="topbar__link">📞 {PHONE_NUMBER_DISPLAY}</a>
           <span className="divider">•</span>
           <a href="mailto:info@grandinconsulting.com" className="topbar__link">✉️ info@grandinconsulting.com</a>
         </div>

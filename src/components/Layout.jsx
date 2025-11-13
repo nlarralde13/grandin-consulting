@@ -1,8 +1,9 @@
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Footer from "./Footer.jsx";
 import Header from "./Header.jsx";
 import TopBar from "./TopBar.jsx";
+import { ORG_SCHEMA } from "../config/siteMeta.js";
 
 const TABS = [
   { id: "home", label: "Home" },
@@ -31,6 +32,21 @@ export default function Layout() {
     () => ({ tabs: TABS, activeId, onTabChange, setActiveId, tabRefs }),
     [activeId, onTabChange]
   );
+
+  useEffect(() => {
+    const existing = document.getElementById("org-schema");
+    if (existing) return;
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.id = "org-schema";
+    script.textContent = JSON.stringify(ORG_SCHEMA);
+    document.head.appendChild(script);
+    return () => {
+      if (document.getElementById("org-schema") === script) {
+        document.head.removeChild(script);
+      }
+    };
+  }, []);
 
   return (
     <>

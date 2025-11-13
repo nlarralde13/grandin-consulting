@@ -11,7 +11,7 @@ export default function App() {
 
   const panels = useMemo(
     () => ({
-      home: <Home onGetConsultation={() => setActiveId("contact")} />,
+      home: <Home />,
       services: <Services />,
       about: <About />,
       contact: <Contact onSuccess={() => navigate("/thanks")} />,

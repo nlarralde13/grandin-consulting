@@ -4,6 +4,14 @@ import FeatureGrid from "../components/FeatureGrid.jsx";
 import PartnerStrip from "../components/PartnerStrip.jsx";
 import StatsRow from "../components/StatsRow.jsx";
 import CTABand from "../components/CTABand.jsx";
+import CredibilityStrip from "../components/CredibilityStrip.jsx";
+import CaseSnapshots from "../components/CaseSnapshots.jsx";
+import ICPSections from "../components/ICPSections.jsx";
+import Guarantees from "../components/Guarantees.jsx";
+import SecurityCompliance from "../components/SecurityCompliance.jsx";
+import CoverageLine from "../components/CoverageLine.jsx";
+import AboutWhy from "../components/AboutWhy.jsx";
+import { CALENDLY_OR_FORM_URL, NAV_LINKS, RUNBOOK_PDF_URL } from "../config/siteMeta.js";
 
 const heroLogos = [
   { src: "/images/logo_transparent.png", alt: "Grandin Consulting badge" },
@@ -40,17 +48,16 @@ function HeroFlipCard({ title, summary }) {
   );
 }
 
-export default function Home({ onGetConsultation }) {
+export default function Home() {
   return (
     <>
       {/* HERO */}
       <section className="hero hero--split" aria-labelledby="home-hero-title">
         <div className="container hero__inner">
           <div className="hero__left">
-            <h1 id="home-hero-title">Managed IT Solutions for Modern Business</h1>
+            <h1 id="home-hero-title">Managed IT & Cloud for Central NJ, NYC & Philadelphia</h1>
             <p className="lead">
-              We set up, secure, and support your IT so your team can focus on the work that matters.
-              Networks, identity, cloud, and automation—without the jargon.
+              SLA-backed support, security, and site reliability for 20–500 user teams.
             </p>
 
             <ul className="hero__bullets">
@@ -60,11 +67,10 @@ export default function Home({ onGetConsultation }) {
             </ul>
 
             <div className="hero-ctas">
-              <Link className="btn btn-primary btn-lg" to="/schedule">Schedule a Call</Link>
-              <Link className="btn btn-outline btn-lg" to="/#contact" onClick={(e)=>{ e.preventDefault(); onGetConsultation?.(); }}>
-                Contact Us
-              </Link>
-              <Link className="btn btn-outline btn-lg" to="/#services">Explore Services</Link>
+              <a className="btn btn-primary btn-lg" href={CALENDLY_OR_FORM_URL} rel="noopener">Book a 15-minute Fit Call</a>
+              <a className="hero-link" href={RUNBOOK_PDF_URL} rel="noopener">
+                Download our Incident Response Runbook (PDF)
+              </a>
             </div>
 
             <div className="hero-trust">
@@ -72,11 +78,13 @@ export default function Home({ onGetConsultation }) {
               <div className="hero-logos">
                 {heroLogos.map((logo) => (
                   <Link key={logo.src} to="/" aria-label="Back to home" className="hero-logo">
-                    <img src={logo.src} alt={logo.alt} />
+                    <img src={logo.src} alt={logo.alt} className="img-safe" />
                   </Link>
                 ))}
               </div>
             </div>
+
+            <CoverageLine />
 
             <div className="trust-row">
               <Link className="trust-chip" to="/case-studies">Case Studies</Link>
@@ -87,7 +95,7 @@ export default function Home({ onGetConsultation }) {
 
           <div className="hero__right">
             <div className="hero-logo-badge">
-              <img src={heroBadgeLogo} alt="Grandin Consulting emblem" />
+              <img src={heroBadgeLogo} alt="Grandin Consulting emblem" className="img-safe" />
               <div>
                 <p className="hero-logo-badge__eyebrow">Your Modern IT Ally</p>
                 <p className="hero-logo-badge__title">Grandin Consulting</p>
@@ -102,10 +110,15 @@ export default function Home({ onGetConsultation }) {
         </div>
       </section>
 
+      <CredibilityStrip />
+      <CaseSnapshots />
+      <ICPSections />
+      <Guarantees compact />
+
       <PartnerStrip />
       <StatsRow />
 
-      {/* SERVICES SECTION (separate from hero) */}
+      {/* SERVICES SECTION */}
       <section aria-labelledby="services-overview-title" className="section services-overview">
         <div className="container">
           <h2 id="services-overview-title" style={{ marginTop: 12 }}>What We Do</h2>
@@ -113,24 +126,19 @@ export default function Home({ onGetConsultation }) {
         </div>
 
         <FeatureGrid />
+        <div className="service-stack-cta">
+          <Link to={NAV_LINKS.serviceStack}>See the full Service Stack & SLA →</Link>
+        </div>
+      </section>
 
-        {/* Optional: keep these only if they add new info vs FeatureGrid */}
-        {/* <div className="container">
-          <div className="grid">
-            <article className="card">
-              <h3>Proactive Management</h3>
-              <p>Monitoring, patching, backups, and support—so your team stays productive and protected.</p>
-            </article>
-            <article className="card">
-              <h3>Right-Sized Cloud</h3>
-              <p>Hybrid designs and migrations for Microsoft 365, Google Workspace, AWS, and Azure.</p>
-            </article>
-            <article className="card">
-              <h3>Built to Grow</h3>
-              <p>Roadmaps and advisory to align IT with your goals—no vendor lock-in, no jargon.</p>
-            </article>
-          </div>
-        </div> */}
+      <SecurityCompliance />
+      <AboutWhy />
+      <section className="faq-teaser" aria-labelledby="faq-teaser-title">
+        <div className="container faq-teaser-card">
+          <h2 id="faq-teaser-title">Need the details?</h2>
+          <p>Get answers on onboarding, response times, after-hours coverage, vendors, and media workflows.</p>
+          <Link className="micro-cta" to={NAV_LINKS.faq}>Browse the FAQ →</Link>
+        </div>
       </section>
       <CTABand />
     </>
