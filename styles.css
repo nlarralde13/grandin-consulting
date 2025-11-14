@@ -917,6 +917,110 @@ input:focus, textarea:focus, select:focus{
   border-radius:999px;
   background: var(--accent);
 }
+.testimonials-section{
+  background:#f7fbff;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.testimonials-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-4);
+}
+.testimonial-card{
+  background:#fff;
+  border-radius: var(--radius-lg);
+  border:1px solid rgba(10,128,192,0.2);
+  box-shadow: 0 20px 45px rgba(6, 74, 116, 0.08);
+  padding: var(--space-4);
+  display:flex;
+  flex-direction:column;
+  gap: var(--space-3);
+}
+.testimonial-rating{
+  font-size: 1rem;
+  letter-spacing: 2px;
+  color: var(--accent-600);
+}
+.testimonial-quote{
+  font-size: 1rem;
+  font-style: italic;
+  margin:0;
+  color: var(--text);
+}
+.testimonial-meta{
+  margin-top:auto;
+}
+.testimonial-name{
+  margin:0;
+  font-weight:700;
+  color: #4a4841;
+}
+.testimonial-role{
+  margin:4px 0 0;
+  color: var(--muted);
+}
+.testimonials-cta{
+  margin-top: var(--space-4);
+  text-align:center;
+}
+.testimonials-page{
+  background: linear-gradient(180deg, #f5f9fd 0%, #ffffff 40%);
+}
+.testimonials-hero{
+  padding: clamp(72px, 14vw, 160px) 0 clamp(40px, 8vw, 80px);
+  text-align:center;
+}
+.testimonials-hero h1{
+  margin: 8px 0;
+  font-size: clamp(36px, 6vw, 56px);
+}
+.testimonials-hero p{
+  margin: 0 auto;
+  max-width: 640px;
+}
+.testimonials-detail{
+  background:#fff;
+}
+.testimonials-list{
+  display:flex;
+  flex-direction:column;
+  gap: var(--space-4);
+}
+.testimonial-detail-card{
+  border-radius: var(--radius-lg);
+  border:1px solid rgba(74, 72, 65, 0.12);
+  padding: var(--space-4);
+  background:#fff;
+  box-shadow: var(--shadow);
+  display:flex;
+  flex-direction:column;
+  gap: var(--space-2);
+}
+.testimonial-detail-rating{
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  color: var(--accent);
+}
+.testimonial-detail-focus{
+  margin:0;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent-600);
+}
+.testimonial-detail-quote{
+  margin:0;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  font-style: italic;
+  color: var(--text);
+}
+.testimonial-detail-meta{
+  margin:0;
+  color: var(--muted);
+  font-weight:600;
+}
 .industries{
   background:#f8fbff;
 }

@@ -1,36 +1,43 @@
 import React from "react";
-
-const testimonials = [
-  {
-    quote: "Grandin made our cloud migration boring—in the best way possible.",
-    who: "COO, Retail Chain",
-  },
-  {
-    quote: "We finally have one place to manage users and laptops. Huge relief.",
-    who: "Office Manager, Dental Group",
-  },
-  {
-    quote: "Their DR plan paid for itself the first time we needed it.",
-    who: "Founder, Creative Studio",
-  },
-];
+import { TESTIMONIALS } from "../data/testimonials.js";
 
 export default function Testimonials() {
   return (
-    <main className="container" style={{ paddingTop: 72 }}>
-      <header className="section-header">
-        <h2>Client Testimonials</h2>
-        <p className="muted">Short quotes. Big outcomes.</p>
-      </header>
+    <main className="testimonials-page">
+      <section className="testimonials-hero" aria-labelledby="testimonials-hero-title">
+        <div className="container">
+          <p className="eyebrow">Client feedback</p>
+          <h1 id="testimonials-hero-title">Client Testimonials</h1>
+          <p className="muted">
+            Real stories from teams we have helped stabilize, secure, and modernize their IT operations across the region.
+          </p>
+        </div>
+      </section>
 
-      <div className="grid">
-        {testimonials.map((t, i) => (
-          <blockquote key={i} className="card">
-            <p style={{ fontStyle: "italic" }}>“{t.quote}”</p>
-            <p className="muted">— {t.who}</p>
-          </blockquote>
-        ))}
-      </div>
+      <section className="section testimonials-detail" aria-labelledby="testimonials-detail-title">
+        <div className="container">
+          <div className="section-header">
+            <h2 id="testimonials-detail-title">Proof points from the field</h2>
+            <p>
+              Same senior team, different industries. Each engagement starts with clarity, a plan, and measurable outcomes.
+            </p>
+          </div>
+          <div className="testimonials-list">
+            {TESTIMONIALS.map((testimonial) => (
+              <article className="testimonial-detail-card" key={testimonial.id}>
+                <div className="testimonial-detail-rating" aria-label={`${testimonial.rating} out of 5 stars`}>
+                  {"★".repeat(testimonial.rating)}
+                </div>
+                {testimonial.focus && <p className="testimonial-detail-focus">{testimonial.focus}</p>}
+                <p className="testimonial-detail-quote">“{testimonial.quote}”</p>
+                <p className="testimonial-detail-meta">
+                  — {testimonial.name}, {testimonial.role}, {testimonial.company}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

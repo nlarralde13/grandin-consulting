@@ -5,7 +5,7 @@ import { CALENDLY_OR_FORM_URL, PHONE_NUMBER_DISPLAY, PHONE_NUMBER_TEL } from "..
 const LOGO_SRC = "/images/logo_white_background.png";
 const NAV_ITEMS = [
   { label: "Services", to: "/#services" },
-  { label: "Solutions", to: "/#solutions" },
+  { label: "Testimonials", to: "/testimonials" },
   { label: "Industries", to: "/#industries" },
   { label: "About", to: "/#about" },
   { label: "Resources", to: "/#resources" },

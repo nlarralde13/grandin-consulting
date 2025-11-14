@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import CTABand from "../components/CTABand.jsx";
 import CoverageLine from "../components/CoverageLine.jsx";
 import IPInfoCard from "../components/IPInfoCard.jsx";
+import { TESTIMONIALS } from "../data/testimonials.js";
 import { CALENDLY_OR_FORM_URL, PHONE_NUMBER_DISPLAY, PHONE_NUMBER_TEL, RUNBOOK_PDF_URL } from "../config/siteMeta.js";
 
 const SERVICE_PILLARS = [
@@ -109,6 +110,37 @@ export default function Home() {
                 </ul>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section testimonials-section" aria-labelledby="testimonials-title">
+        <div className="container">
+          <p className="eyebrow">Client feedback</p>
+          <div className="section-header">
+            <h2 id="testimonials-title">What our clients say</h2>
+            <p>A few words from teams we have helped modernize their IT and operations.</p>
+          </div>
+          <div className="testimonials-grid">
+            {TESTIMONIALS.map((testimonial) => (
+              <article className="testimonial-card" key={testimonial.id}>
+                <div className="testimonial-rating" aria-label={`${testimonial.rating} out of 5 stars`}>
+                  {"★".repeat(testimonial.rating)}
+                </div>
+                <p className="testimonial-quote">“{testimonial.quote}”</p>
+                <div className="testimonial-meta">
+                  <p className="testimonial-name">{testimonial.name}</p>
+                  <p className="testimonial-role">
+                    {testimonial.role}, {testimonial.company}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+          <div className="testimonials-cta">
+            <Link className="btn btn-outline" to="/testimonials">
+              Read more testimonials
+            </Link>
           </div>
         </div>
       </section>
