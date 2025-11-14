@@ -1,146 +1,168 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import FeatureGrid from "../components/FeatureGrid.jsx";
-import PartnerStrip from "../components/PartnerStrip.jsx";
-import StatsRow from "../components/StatsRow.jsx";
 import CTABand from "../components/CTABand.jsx";
-import CredibilityStrip from "../components/CredibilityStrip.jsx";
-import CaseSnapshots from "../components/CaseSnapshots.jsx";
-import ICPSections from "../components/ICPSections.jsx";
-import Guarantees from "../components/Guarantees.jsx";
-import SecurityCompliance from "../components/SecurityCompliance.jsx";
 import CoverageLine from "../components/CoverageLine.jsx";
-import AboutWhy from "../components/AboutWhy.jsx";
-import { CALENDLY_OR_FORM_URL, NAV_LINKS, RUNBOOK_PDF_URL } from "../config/siteMeta.js";
+import { CALENDLY_OR_FORM_URL, PHONE_NUMBER_DISPLAY, PHONE_NUMBER_TEL, RUNBOOK_PDF_URL } from "../config/siteMeta.js";
 
-const heroLogos = [
-  { src: "/images/logo_transparent.png", alt: "Grandin Consulting badge" },
-  { src: "/images/logo_white_background.png", alt: "Grandin Consulting full logo" },
-];
-const heroBadgeLogo = "/images/logo_white_background.png";
-const heroTiles = [
-  { title: "Wi-Fi", summary: "Mesh Wi-Fi tuned for density and roaming with built-in health alerts." },
-  { title: "Identity", summary: "Modern identity that unifies SSO, MFA, and lifecycle automation." },
-  { title: "Backups", summary: "Policy-driven backups with immutable storage and quarterly tests." },
-  { title: "Cloud", summary: "Right-sized cloud foundations with cost guardrails and telemetry." },
+const SERVICE_PILLARS = [
+  {
+    title: "Managed Infrastructure",
+    summary: "Wireless, wired, and endpoint support built for hybrid teams.",
+    points: ["24/7 monitoring with documented runbooks", "Network design, Wi-Fi heat mapping, and onsite response"],
+  },
+  {
+    title: "Cloud & Identity",
+    summary: "Secure-by-default cloud footprints that scale without surprises.",
+    points: ["Microsoft 365 + Google Workspace governance", "SSO, MFA, and lifecycle automation across SaaS"],
+  },
+  {
+    title: "Resilience & Security",
+    summary: "Proactive defense plus recovery plans that are actually tested.",
+    points: ["Immutable backups with quarterly validations", "Security awareness, compliance reporting, and SOC handoffs"],
+  },
 ];
 
-function HeroFlipCard({ title, summary }) {
-  const [flipped, setFlipped] = useState(false);
-  return (
-    <button
-      type="button"
-      className={`hero-flip-card${flipped ? " is-flipped" : ""}`}
-      onClick={() => setFlipped((state) => !state)}
-      aria-pressed={flipped}
-    >
-      <span className="hero-flip-card__inner">
-        <span className="hero-flip-card__face hero-flip-card__face--front">
-          {title}
-        </span>
-        <span className="hero-flip-card__face hero-flip-card__face--back">
-          <strong>{title}</strong>
-          <p>{summary}</p>
-          <span className="hero-flip-card__hint">Tap to flip back</span>
-        </span>
-      </span>
-    </button>
-  );
-}
+const INDUSTRIES = [
+  { title: "Professional Services", detail: "Legal, accounting, creative, and investment firms that need audited workflows." },
+  { title: "Healthcare & Life Sciences", detail: "Multi-site practices and labs balancing PHI protection with clinic uptime." },
+  { title: "Growth-Stage Operators", detail: "Private equity portfolio companies and regional franchises expanding offices quickly." },
+];
 
 export default function Home() {
+  const [showConfirmation, setShowConfirmation] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.sessionStorage.getItem("contactSubmitted") === "1") {
+      setShowConfirmation(true);
+      window.sessionStorage.removeItem("contactSubmitted");
+    }
+  }, []);
+
   return (
-    <>
-      {/* HERO */}
-      <section className="hero hero--split" aria-labelledby="home-hero-title">
-        <div className="container hero__inner">
-          <div className="hero__left">
-            <h1 id="home-hero-title">Managed IT & Cloud for Central NJ, NYC & Philadelphia</h1>
-            <p className="lead">
-              SLA-backed support, security, and site reliability for 20–500 user teams.
+    <div className="home">
+      {showConfirmation && (
+        <div className="form-confirmation" role="status">
+          <p>Your message is in. We will reach out shortly.</p>
+          <button type="button" onClick={() => setShowConfirmation(false)} aria-label="Dismiss notification">
+            ×
+          </button>
+        </div>
+      )}
+      <section className="home-hero" id="hero" aria-labelledby="hero-title">
+        <div className="container home-hero__inner">
+          <div className="home-hero__content">
+            <p className="home-hero__eyebrow">Managed IT & Cloud Operations</p>
+            <h1 id="hero-title">Modern IT for Small & Mid-Sized Businesses</h1>
+            <p className="home-hero__summary">
+              We build and operate reliable IT environments for 20-500 user organizations across New Jersey, NYC, and
+              Philadelphia. Infrastructure, cybersecurity, cloud, and onsite response handled by one accountable team.
             </p>
 
-            <ul className="hero__bullets">
-              <li><span aria-hidden="true">✅ </span>Proactive network & endpoint management</li>
-              <li><span aria-hidden="true">✅ </span>Cloud migrations for Microsoft 365 / Google Workspace</li>
-              <li><span aria-hidden="true">✅ </span>Backup & disaster recovery, documented and tested</li>
+            <ul className="home-hero__points">
+              <li>Proactive monitoring, patching, and onsite support</li>
+              <li>Modern identity, device, and SaaS governance</li>
+              <li>Backups, DR, and compliance-ready reporting</li>
             </ul>
 
-            <div className="hero-ctas">
-              <a className="btn btn-primary btn-lg" href={CALENDLY_OR_FORM_URL} rel="noopener">Book a 15-minute Fit Call</a>
-              <a className="hero-link" href={RUNBOOK_PDF_URL} rel="noopener">
-                Download our Incident Response Runbook (PDF)
+            <div className="home-hero__ctas">
+              <Link className="btn btn-primary btn-lg" to={CALENDLY_OR_FORM_URL}>
+                Book a Consultation
+              </Link>
+              <a className="btn btn-outline btn-lg" href={PHONE_NUMBER_TEL} aria-label={`Call ${PHONE_NUMBER_DISPLAY}`}>
+                Call {PHONE_NUMBER_DISPLAY}
               </a>
             </div>
 
-            <div className="hero-trust">
-              <p className="muted hero-trust__label">Trusted by teams that value clear, modern IT</p>
-              <div className="hero-logos">
-                {heroLogos.map((logo) => (
-                  <Link key={logo.src} to="/" aria-label="Back to home" className="hero-logo">
-                    <img src={logo.src} alt={logo.alt} className="img-safe" />
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            <CoverageLine />
-
-            <div className="trust-row">
-              <Link className="trust-chip" to="/case-studies">Case Studies</Link>
-              <span className="trust-chip">Plain-English Support</span>
-              <span className="trust-chip">SMB-Friendly Plans</span>
-            </div>
+            <a className="home-hero__link" href={RUNBOOK_PDF_URL} rel="noopener">
+              Review a sample incident response runbook ->
+            </a>
           </div>
 
-          <div className="hero__right">
-            <div className="hero-logo-badge">
-              <img src={heroBadgeLogo} alt="Grandin Consulting emblem" className="img-safe" />
-              <div>
-                <p className="hero-logo-badge__eyebrow">Your Modern IT Ally</p>
-                <p className="hero-logo-badge__title">Grandin Consulting</p>
+          <div className="home-hero__media" aria-hidden="true">
+            <div className="home-hero-visual">
+              <div className="home-hero-visual__header">
+                <span>Live environment</span>
+                <span className="home-status-pill">All systems operational</span>
               </div>
-            </div>
-            <div className="hero-illustration" aria-label="Core managed IT solutions">
-              {heroTiles.map((tile) => (
-                <HeroFlipCard key={tile.title} title={tile.title} summary={tile.summary} />
-              ))}
+              <div className="home-hero-visual__body">
+                <div>
+                  <p className="home-metric-label">Sites online</p>
+                  <p className="home-metric-value">12</p>
+                </div>
+                <div>
+                  <p className="home-metric-label">Incidents</p>
+                  <p className="home-metric-value home-metric-value--success">0</p>
+                </div>
+                <div>
+                  <p className="home-metric-label">Response SLA</p>
+                  <p className="home-metric-value">14 min</p>
+                </div>
+              </div>
+              <div className="home-hero-visual__footer">
+                <p>Automated reports ship monthly with clear next steps.</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <CredibilityStrip />
-      <CaseSnapshots />
-      <ICPSections />
-      <Guarantees compact />
-
-      <PartnerStrip />
-      <StatsRow />
-
-      {/* SERVICES SECTION */}
-      <section aria-labelledby="services-overview-title" className="section services-overview">
+      <section className="section service-pillars" id="services" aria-labelledby="service-pillars-title">
+        <div className="anchor-target" id="solutions" aria-hidden="true" />
         <div className="container">
-          <h2 id="services-overview-title" style={{ marginTop: 12 }}>What We Do</h2>
-          <p className="muted">Right-sized IT for small and mid-sized teams—fast, secure, and documented.</p>
-        </div>
-
-        <FeatureGrid />
-        <div className="service-stack-cta">
-          <Link to={NAV_LINKS.serviceStack}>See the full Service Stack & SLA →</Link>
+          <p className="eyebrow">What we deliver</p>
+          <div className="section-header">
+            <h2 id="service-pillars-title">Less firefighting. More dependable IT.</h2>
+            <p>
+              Clear scopes, transparent pricing, and right-sized tooling mean you see value in the first 30 days, not after
+              a year of migration work.
+            </p>
+          </div>
+          <div className="pillars-grid">
+            {SERVICE_PILLARS.map((pillar) => (
+              <article key={pillar.title} className="pillar-card">
+                <h3>{pillar.title}</h3>
+                <p className="muted">{pillar.summary}</p>
+                <ul>
+                  {pillar.points.map((point) => (
+                    <li key={point}>{point}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
-      <SecurityCompliance />
-      <AboutWhy />
-      <section className="faq-teaser" aria-labelledby="faq-teaser-title">
-        <div className="container faq-teaser-card">
-          <h2 id="faq-teaser-title">Need the details?</h2>
-          <p>Get answers on onboarding, response times, after-hours coverage, vendors, and media workflows.</p>
-          <Link className="micro-cta" to={NAV_LINKS.faq}>Browse the FAQ →</Link>
+      <section className="section industries" id="industries" aria-labelledby="industries-title">
+        <div className="anchor-target" id="about" aria-hidden="true" />
+        <div className="container">
+          <p className="eyebrow">Who we serve</p>
+          <div className="section-header">
+            <h2 id="industries-title">Teams that expect enterprise-grade reliability.</h2>
+            <p>
+              Grandin Consulting is a senior-run IT partner focused on clarity and measurable outcomes. We work alongside
+              internal stakeholders and fractional CIOs to keep offices productive without the corporate overhead.
+            </p>
+          </div>
+          <div className="industries-grid">
+            {INDUSTRIES.map((industry) => (
+              <article key={industry.title} className="industry-card">
+                <h3>{industry.title}</h3>
+                <p>{industry.detail}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
-      <CTABand />
-    </>
+
+      <section className="section final-cta" id="resources">
+        <div className="anchor-target" id="contact" aria-hidden="true" />
+        <div className="container final-cta__inner">
+          <CoverageLine className="final-coverage" />
+          <CTABand />
+        </div>
+      </section>
+    </div>
   );
 }

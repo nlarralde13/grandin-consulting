@@ -11,9 +11,9 @@ export default function Footer() {
         <p>&copy; <span>{year}</span> Grandin Consulting. All rights reserved.</p>
 
         <nav className="footer-nav" aria-label="Footer">
-          <a href="#panel-about" onClick={(e) => e.preventDefault()}>About</a>
-          <a href="#panel-services" onClick={(e) => e.preventDefault()}>Services</a>
-          <a href="#panel-contact" onClick={(e) => e.preventDefault()}>Contact</a>
+          <Link to="/#about">About</Link>
+          <Link to="/#services">Services</Link>
+          <Link to="/contact">Contact</Link>
         </nav>
 
         <nav className="footer-nav" aria-label="Footer">

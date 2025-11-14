@@ -1,37 +1,12 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Outlet, useLocation } from "react-router-dom";
 import Footer from "./Footer.jsx";
 import Header from "./Header.jsx";
 import TopBar from "./TopBar.jsx";
 import { ORG_SCHEMA } from "../config/siteMeta.js";
 
-const TABS = [
-  { id: "home", label: "Home" },
-  { id: "services", label: "Services" },
-  { id: "about", label: "About" },
-  { id: "contact", label: "Contact" },
-];
-
 export default function Layout() {
-  const [activeId, setActiveId] = useState("home");
-  const tabRefs = useRef({});
-  const navigate = useNavigate();
   const location = useLocation();
-
-  const onTabChange = useCallback(
-    (id) => {
-      setActiveId(id);
-      if (location.pathname !== "/") {
-        navigate("/", { replace: true });
-      }
-    },
-    [location.pathname, navigate]
-  );
-
-  const outletContext = useMemo(
-    () => ({ tabs: TABS, activeId, onTabChange, setActiveId, tabRefs }),
-    [activeId, onTabChange]
-  );
 
   useEffect(() => {
     const existing = document.getElementById("org-schema");
@@ -48,11 +23,24 @@ export default function Layout() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!location.hash) return;
+    const targetId = location.hash.replace("#", "");
+    const scrollToHash = () => {
+      const el = document.getElementById(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    };
+    const timer = setTimeout(scrollToHash, 50);
+    return () => clearTimeout(timer);
+  }, [location]);
+
   return (
     <>
       <TopBar />
-      <Header tabs={TABS} activeId={activeId} onTabChange={onTabChange} tabRefs={tabRefs} />
-      <Outlet context={outletContext} />
+      <Header />
+      <Outlet />
       <Footer />
     </>
   );
