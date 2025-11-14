@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CTABand from "../components/CTABand.jsx";
 import CoverageLine from "../components/CoverageLine.jsx";
+import IPInfoCard from "../components/IPInfoCard.jsx";
 import { CALENDLY_OR_FORM_URL, PHONE_NUMBER_DISPLAY, PHONE_NUMBER_TEL, RUNBOOK_PDF_URL } from "../config/siteMeta.js";
 
 const SERVICE_PILLARS = [
@@ -79,30 +80,8 @@ export default function Home() {
             </a>
           </div>
 
-          <div className="home-hero__media" aria-hidden="true">
-            <div className="home-hero-visual">
-              <div className="home-hero-visual__header">
-                <span>Live environment</span>
-                <span className="home-status-pill">All systems operational</span>
-              </div>
-              <div className="home-hero-visual__body">
-                <div>
-                  <p className="home-metric-label">Sites online</p>
-                  <p className="home-metric-value">12</p>
-                </div>
-                <div>
-                  <p className="home-metric-label">Incidents</p>
-                  <p className="home-metric-value home-metric-value--success">0</p>
-                </div>
-                <div>
-                  <p className="home-metric-label">Response SLA</p>
-                  <p className="home-metric-value">14 min</p>
-                </div>
-              </div>
-              <div className="home-hero-visual__footer">
-                <p>Automated reports ship monthly with clear next steps.</p>
-              </div>
-            </div>
+          <div className="home-hero__media">
+            <IPInfoCard />
           </div>
         </div>
       </section>
@@ -155,6 +134,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+     
 
       <section className="section final-cta" id="resources">
         <div className="anchor-target" id="contact" aria-hidden="true" />

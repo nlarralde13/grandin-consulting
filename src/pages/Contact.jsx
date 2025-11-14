@@ -19,23 +19,25 @@ export default function Contact({ onSuccess }) {
     const nextErrors = {};
     const fullName = data.get("fullName")?.trim();
     const companyName = data.get("companyName")?.trim();
-    const email = data.get("businessEmail");
+    const email = data.get("email");
     const phone = data.get("phone")?.trim();
     const referral = data.get("referral");
-    const projectDetails = data.get("projectDetails")?.trim();
+    const projectDetails = data.get("message")?.trim();
 
     if (!fullName) nextErrors.fullName = "Please enter your full name.";
     if (!companyName) nextErrors.companyName = "Please enter your company name.";
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) nextErrors.businessEmail = "Enter a valid business email.";
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) nextErrors.email = "Enter a valid business email.";
     if (!phone) nextErrors.phone = "Please add a phone number.";
     if (!referral) nextErrors.referral = "Let us know how you found us.";
-    if (!projectDetails) nextErrors.projectDetails = "Share what you need help with.";
+    if (!projectDetails) nextErrors.message = "Share what you need help with.";
     if (!data.get("consent")) nextErrors.consent = "Consent is required.";
 
     if (Object.keys(nextErrors).length) {
       setErrors(nextErrors);
       return;
     }
+
+    data.set("_replyto", email);
 
     setSending(true);
 
@@ -121,13 +123,13 @@ export default function Contact({ onSuccess }) {
                 <label htmlFor="businessEmail">Business Email</label>
                 <input
                   id="businessEmail"
-                  name="businessEmail"
+                  name="email"
                   type="email"
                   autoComplete="email"
                   required
-                  aria-invalid={!!errors.businessEmail}
+                  aria-invalid={!!errors.email}
                 />
-                <small className="error" aria-live="polite">{errors.businessEmail || ""}</small>
+                <small className="error" aria-live="polite">{errors.email || ""}</small>
               </div>
               <div className="field">
                 <label htmlFor="phone">Phone Number</label>
@@ -201,12 +203,12 @@ export default function Contact({ onSuccess }) {
               <label htmlFor="projectDetails">What are you looking for help with?</label>
               <textarea
                 id="projectDetails"
-                name="projectDetails"
+                name="message"
                 rows="6"
                 required
-                aria-invalid={!!errors.projectDetails}
+                aria-invalid={!!errors.message}
               />
-              <small className="error" aria-live="polite">{errors.projectDetails || ""}</small>
+              <small className="error" aria-live="polite">{errors.message || ""}</small>
             </div>
             <div className="form-grid">
               <div className="field">

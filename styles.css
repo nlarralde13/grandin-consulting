@@ -715,6 +715,77 @@ input:focus, textarea:focus, select:focus{
   display:flex;
   justify-content:center;
 }
+.ipinfo-card{
+  width: min(440px, 100%);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  border-left: 5px solid #0a80c0;
+  background:#fff;
+  box-shadow: var(--shadow);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+.ipinfo-header{
+  padding: var(--space-3) var(--space-4);
+  background: linear-gradient(120deg, rgba(10,128,192,0.12), rgba(10,128,192,0.02));
+  border-bottom:1px solid var(--line);
+}
+.ipinfo-pretitle{
+  margin:0 0 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  font-weight:600;
+  color: var(--accent-600);
+}
+.ipinfo-header h3{
+  margin:0;
+  font-size: 1.25rem;
+  color: #4a4841;
+}
+.ipinfo-body{
+  padding: var(--space-4);
+  background: #fbfcfe;
+  display:flex;
+  flex-direction:column;
+  gap: var(--space-3);
+}
+.ipinfo-lines{
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:flex;
+  flex-direction:column;
+  gap: 8px;
+  font-family: "JetBrains Mono", "IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.95rem;
+}
+.ipinfo-line{
+  display:flex;
+  flex-wrap:wrap;
+  column-gap: 12px;
+  row-gap: 2px;
+}
+.ipinfo-key{
+  color: var(--accent-600);
+  font-weight:600;
+  text-transform: lowercase;
+}
+.ipinfo-value{
+  color: var(--text);
+}
+.ipinfo-message{
+  margin:0;
+  font-family: "JetBrains Mono", "IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.ipinfo-meta{
+  margin:0;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
 .home-hero-visual{
   width: min(420px, 100%);
   border-radius: var(--radius-lg);
@@ -774,6 +845,9 @@ input:focus, textarea:focus, select:focus{
   }
   .home-hero__media{
     order:-1;
+  }
+  .ipinfo-card{
+    width: 100%;
   }
 }
 
