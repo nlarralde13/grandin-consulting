@@ -8,19 +8,31 @@ import { CALENDLY_OR_FORM_URL, PHONE_NUMBER_DISPLAY, PHONE_NUMBER_TEL, RUNBOOK_P
 
 const SERVICE_PILLARS = [
   {
-    title: "Managed Infrastructure",
-    summary: "Wireless, wired, and endpoint support built for hybrid teams.",
-    points: ["24/7 monitoring with documented runbooks", "Network design, Wi-Fi heat mapping, and onsite response"],
+    title: "IT Support & Workplace Management",
+    summary: "Keep your people and devices running smoothly",
+    points: [
+      "Unlimited helpdesk for everyday issues",
+      "Onboarding, offboarding, and device maintenance handled for you",
+      "Simple, predictable monthly pricing",
+    ],
   },
   {
-    title: "Cloud & Identity",
-    summary: "Secure-by-default cloud footprints that scale without surprises.",
-    points: ["Microsoft 365 + Google Workspace governance", "SSO, MFA, and lifecycle automation across SaaS"],
+    title: "Secure Cloud & Network Foundations",
+    summary: "Modern tools and reliable connectivity",
+    points: [
+      "Business-grade Wi-Fi and a clean, stable network",
+      "Email and files organized in Microsoft 365 or Google Workspace",
+      "Built-in protections like MFA, safe file access, and smarter spam filtering",
+    ],
   },
   {
-    title: "Resilience & Security",
-    summary: "Proactive defense plus recovery plans that are actually tested.",
-    points: ["Immutable backups with quarterly validations", "Security awareness, compliance reporting, and SOC handoffs"],
+    title: "Protection, Backup & Physical Security",
+    summary: "Defend the business from outages and threats",
+    points: [
+      "Automated backups for computers and cloud accounts",
+      "Monitored antivirus/EDR and password management",
+      "IP cameras, remote viewing, and simple door-access systems",
+    ],
   },
 ];
 
@@ -98,19 +110,19 @@ export default function Home() {
               a year of migration work.
             </p>
           </div>
-          <div className="pillars-grid">
-            {SERVICE_PILLARS.map((pillar) => (
-              <article key={pillar.title} className="pillar-card">
-                <h3>{pillar.title}</h3>
-                <p className="muted">{pillar.summary}</p>
-                <ul>
-                  {pillar.points.map((point) => (
-                    <li key={point}>{point}</li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
+        </div>
+        <div className="container pillars-grid">
+          {SERVICE_PILLARS.map((pillar) => (
+            <article key={pillar.title} className="pillar-card">
+              <h3>{pillar.title}</h3>
+              <p className="muted">{pillar.summary}</p>
+              <ul>
+                {pillar.points.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -148,21 +160,33 @@ export default function Home() {
       <section className="section industries" id="industries" aria-labelledby="industries-title">
         <div className="anchor-target" id="about" aria-hidden="true" />
         <div className="container">
-          <p className="eyebrow">Who we serve</p>
-          <div className="section-header">
-            <h2 id="industries-title">Teams that expect enterprise-grade reliability.</h2>
-            <p>
-              Grandin Consulting is a senior-run IT partner focused on clarity and measurable outcomes. We work alongside
-              internal stakeholders and fractional CIOs to keep offices productive without the corporate overhead.
-            </p>
-          </div>
-          <div className="industries-grid">
-            {INDUSTRIES.map((industry) => (
-              <article key={industry.title} className="industry-card">
-                <h3>{industry.title}</h3>
-                <p>{industry.detail}</p>
-              </article>
-            ))}
+          <div className="industries-card">
+            <p className="eyebrow">Who we serve</p>
+            <div className="section-header">
+              <h2 id="industries-title">Teams that expect enterprise-grade reliability.</h2>
+              <p>
+                Grandin Consulting is a senior-level IT team for organizations that can{"'"}t afford downtime. With more than forty years
+                of combined experience across desktop support, enterprise networks, cloud platforms, and hybrid media infrastructure, we design
+                and support systems that just work.
+                <br />
+                <br />
+                We bring enterprise-grade discipline to small and midsize businesses, delivering clear communication, predictable results,
+                and technology that quietly does its job while your team does theirs.
+              </p>
+              <div className="section-header__cta">
+                <Link className="btn btn-outline" to="/about">
+                  Read more about us
+                </Link>
+              </div>
+            </div>
+            <div className="industries-grid">
+              {INDUSTRIES.map((industry) => (
+                <article key={industry.title} className="industry-card">
+                  <h3>{industry.title}</h3>
+                  <p>{industry.detail}</p>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </section>

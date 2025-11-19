@@ -12,6 +12,7 @@ import Testimonials from "./pages/Testimonials.jsx";
 import Terms from "./pages/Terms.jsx";
 import Thanks from "./pages/Thanks.jsx";
 import Contact from "./pages/Contact.jsx";
+import About from "./pages/About.jsx";
 import Layout from "./components/Layout.jsx";
 
 const router = createBrowserRouter([
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <App /> },
       { path: "contact", element: <Contact /> },
+      { path: "about", element: <About /> },
       { path: "thanks", element: <Thanks /> },
       { path: "case-studies", element: <CaseStudies /> },
       { path: "service-stack", element: <ServiceStack /> },
