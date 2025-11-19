@@ -8,21 +8,23 @@ import { CALENDLY_OR_FORM_URL, PHONE_NUMBER_DISPLAY, PHONE_NUMBER_TEL, RUNBOOK_P
 
 const SERVICE_PILLARS = [
   {
-    title: "IT Support & Workplace Management",
+    title: "IT Support & Helpdesk",
     summary: "Keep your people and devices running smoothly",
     points: [
-      "Unlimited helpdesk for everyday issues",
-      "Onboarding, offboarding, and device maintenance handled for you",
-      "Simple, predictable monthly pricing",
+      "Full-service desktop & user support for day-to-day issues",
+      "Active Directory, device, and permissions management",
+      "Vendor and software license administration",
+      "Remote and Onsite support options",
     ],
   },
   {
     title: "Secure Cloud & Network Foundations",
     summary: "Modern tools and reliable connectivity",
     points: [
-      "Business-grade Wi-Fi and a clean, stable network",
-      "Email and files organized in Microsoft 365 or Google Workspace",
-      "Built-in protections like MFA, safe file access, and smarter spam filtering",
+      "Business-grade Wi-Fi and network design and implementation",
+      "Ground to cloud migrations and SaaS management",
+      "Centralized identity and device management with SSO and MDM",
+      "24/7 network monitoring and incident response",
     ],
   },
   {
@@ -30,8 +32,9 @@ const SERVICE_PILLARS = [
     summary: "Defend the business from outages and threats",
     points: [
       "Automated backups for computers and cloud accounts",
-      "Monitored antivirus/EDR and password management",
+      "Monitored antivirus and password management",
       "IP cameras, remote viewing, and simple door-access systems",
+      "Disaster recovery planning and compliance reporting",
     ],
   },
 ];
@@ -104,10 +107,9 @@ export default function Home() {
         <div className="container">
           <p className="eyebrow">What we deliver</p>
           <div className="section-header">
-            <h2 id="service-pillars-title">Less firefighting. More dependable IT.</h2>
+            <h2 id="service-pillars-title">Managed IT Solutions that scale.</h2>
             <p>
-              Clear scopes, transparent pricing, and right-sized tooling mean you see value in the first 30 days, not after
-              a year of migration work.
+              Clear scopes and purpose-built tools mean your systems get stabilized fast, and your team gets the support they need without disruption.
             </p>
           </div>
         </div>
