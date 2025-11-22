@@ -46,6 +46,10 @@ body{
     var(--bg);
   font-family: var(--font-body);
   line-height: 1.5;
+  /* Prevent accidental horizontal pans revealing the off-canvas nav on Android */
+  touch-action: pan-y;
+  overscroll-behavior-x: none;
+  overflow-x: hidden;
 }
 
 /* Layout helpers */
