@@ -1,6 +1,8 @@
 import React from "react";
 import { TESTIMONIALS } from "../data/testimonials.js";
 
+const VISIBLE_TESTIMONIALS = TESTIMONIALS.slice(0, 2);
+
 export default function Testimonials() {
   return (
     <main className="testimonials-page">
@@ -23,15 +25,15 @@ export default function Testimonials() {
             </p>
           </div>
           <div className="testimonials-list">
-            {TESTIMONIALS.map((testimonial) => (
+            {VISIBLE_TESTIMONIALS.map((testimonial) => (
               <article className="testimonial-detail-card" key={testimonial.id}>
                 <div className="testimonial-detail-rating" aria-label={`${testimonial.rating} out of 5 stars`}>
-                  {"★".repeat(testimonial.rating)}
+                  {"*".repeat(testimonial.rating)}
                 </div>
                 {testimonial.focus && <p className="testimonial-detail-focus">{testimonial.focus}</p>}
-                <p className="testimonial-detail-quote">“{testimonial.quote}”</p>
+                <p className="testimonial-detail-quote">"{testimonial.quote}"</p>
                 <p className="testimonial-detail-meta">
-                  — {testimonial.name}, {testimonial.role}, {testimonial.company}
+                  � {testimonial.name}, {testimonial.role}, {testimonial.company}
                 </p>
               </article>
             ))}

@@ -45,6 +45,15 @@ const INDUSTRIES = [
   { title: "Growth-Stage Operators", detail: "Private equity portfolio companies and regional franchises expanding offices quickly." },
 ];
 
+const HOME_TESTIMONIALS = TESTIMONIALS.slice(0, 2);
+
+const truncateWords = (text, limit = 120) => {
+  if (!text) return "";
+  const words = text.trim().split(/\s+/);
+  if (words.length <= limit) return text.trim();
+  return `${words.slice(0, limit).join(" ")}...`;
+};
+
 export default function Home() {
   const [showConfirmation, setShowConfirmation] = useState(false);
 
@@ -62,7 +71,7 @@ export default function Home() {
         <div className="form-confirmation" role="status">
           <p>Your message is in. We will reach out shortly.</p>
           <button type="button" onClick={() => setShowConfirmation(false)} aria-label="Dismiss notification">
-            ×
+            A-
           </button>
         </div>
       )}
@@ -136,18 +145,21 @@ export default function Home() {
             <p>A few words from teams we have helped modernize their IT and operations.</p>
           </div>
           <div className="testimonials-grid">
-            {TESTIMONIALS.map((testimonial) => (
+            {HOME_TESTIMONIALS.map((testimonial) => (
               <article className="testimonial-card" key={testimonial.id}>
                 <div className="testimonial-rating" aria-label={`${testimonial.rating} out of 5 stars`}>
-                  {"★".repeat(testimonial.rating)}
+                  {"*".repeat(testimonial.rating)}
                 </div>
-                <p className="testimonial-quote">“{testimonial.quote}”</p>
+                <p className="testimonial-quote">"{truncateWords(testimonial.quote, 120)}"</p>
                 <div className="testimonial-meta">
                   <p className="testimonial-name">{testimonial.name}</p>
                   <p className="testimonial-role">
                     {testimonial.role}, {testimonial.company}
                   </p>
                 </div>
+                <Link className="btn btn-outline btn-sm" to="/testimonials">
+                  Read full testimonial
+                </Link>
               </article>
             ))}
           </div>
@@ -167,7 +179,7 @@ export default function Home() {
             <div className="section-header">
               <h2 id="industries-title">Teams that expect enterprise-grade reliability.</h2>
               <p>
-                Grandin Consulting is a senior-level IT team for organizations that can{"'"}t afford downtime. With more than forty years
+                Grandin Consulting is a senior-level IT team for organizations that can't afford downtime. With more than forty years
                 of combined experience across desktop support, enterprise networks, cloud platforms, and hybrid media infrastructure, we design
                 and support systems that just work.
                 <br />
