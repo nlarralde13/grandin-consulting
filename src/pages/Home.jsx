@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import CTABand from "../components/CTABand.jsx";
 import CoverageLine from "../components/CoverageLine.jsx";
 import IPInfoCard from "../components/IPInfoCard.jsx";
+import { RESOURCES } from "../data/resources.js";
 import { TESTIMONIALS } from "../data/testimonials.js";
 import { CALENDLY_OR_FORM_URL, PHONE_NUMBER_DISPLAY, PHONE_NUMBER_TEL, RUNBOOK_PDF_URL } from "../config/siteMeta.js";
 
@@ -46,6 +47,8 @@ const INDUSTRIES = [
 ];
 
 const HOME_TESTIMONIALS = TESTIMONIALS.slice(0, 2);
+const FEATURED_RESOURCES = RESOURCES.slice(0, 2);
+const FEATURED_RESOURCE = RESOURCES[0];
 
 const truncateWords = (text, limit = 120) => {
   if (!text) return "";
@@ -106,7 +109,20 @@ export default function Home() {
           </div>
 
           <div className="home-hero__media">
-            <IPInfoCard />
+            <div className="home-hero__stack">
+              {FEATURED_RESOURCE && (
+                <Link className="hero-resource-card" to={`/insights#${FEATURED_RESOURCE.id}`}>
+                  <div className="hero-resource-top">
+                    <span className="pill pill-light">New</span>
+                    <span className="pill pill-muted">{FEATURED_RESOURCE.type}</span>
+                  </div>
+                  <h3>{FEATURED_RESOURCE.title}</h3>
+                  <p>{FEATURED_RESOURCE.summary}</p>
+                  <span className="hero-resource-cta">Read now</span>
+                </Link>
+              )}
+              <IPInfoCard />
+            </div>
           </div>
         </div>
       </section>
@@ -204,9 +220,46 @@ export default function Home() {
           </div>
         </div>
       </section>
-     
 
-      <section className="section final-cta" id="resources">
+     
+      <section className="section resources-section" id="resources" aria-labelledby="resources-title">
+        <div className="container">
+          <p className="eyebrow">Blog & Whitepapers</p>
+          <div className="section-header">
+            <h2 id="resources-title">Practical guidance to modernize safely.</h2>
+            <p>Actionable breakdowns for SMB teams planning upgrades, security hardening, and remote work.</p>
+          </div>
+
+          <div className="resources-grid">
+            {FEATURED_RESOURCES.map((resource) => (
+              <article key={resource.id} className="resource-card">
+                <div className="resource-meta">
+                  <span className="pill">{resource.type}</span>
+                  <span className="pill pill-muted">{resource.readTime}</span>
+                </div>
+                <h3>{resource.title}</h3>
+                <p className="muted">{resource.summary}</p>
+                <ul className="resource-points">
+                  {resource.highlights.map((point) => (
+                    <li key={point}>{point}</li>
+                  ))}
+                </ul>
+                <Link className="btn btn-outline btn-sm" to={`/insights#${resource.id}`}>
+                  Read the full piece
+                </Link>
+              </article>
+            ))}
+          </div>
+
+          <div className="resources-cta">
+            <Link className="btn btn-outline" to="/insights">
+              View all resources
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="section final-cta" id="contact-section">
         <div className="anchor-target" id="contact" aria-hidden="true" />
         <div className="container final-cta__inner">
           <CoverageLine className="final-coverage" />
