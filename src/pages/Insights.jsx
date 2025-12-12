@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { RESOURCES } from "../data/resources.js";
 
 export default function Insights() {
@@ -12,14 +13,43 @@ export default function Insights() {
         </div>
       </section>
 
+      <section className="section insights-cards" aria-labelledby="insights-cards-title">
+        <div className="container">
+          <div className="section-header">
+            <h2 id="insights-cards-title">Latest resources</h2>
+            <p>Skim the key points or jump into the full write-up.</p>
+          </div>
+          <div className="insights-card-grid">
+            {RESOURCES.map((resource) => (
+              <Link key={resource.id} className="resource-card resource-card--link" to={`#${resource.id}`}>
+                <div className="resource-meta">
+                  <span className="pill">{resource.type}</span>
+                  {resource.readTime && <span className="pill pill-muted">{resource.readTime}</span>}
+                </div>
+                <h3>{resource.title}</h3>
+                <p className="muted">{resource.summary}</p>
+                {resource.highlights?.length ? (
+                  <ul className="resource-points">
+                    {resource.highlights.slice(0, 3).map((point) => (
+                      <li key={point}>{point}</li>
+                    ))}
+                  </ul>
+                ) : null}
+                <span className="resource-cta">Jump to article</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="section insights-list" aria-labelledby="insights-list-title">
         <div className="container">
           <div className="section-header">
-            <h2 id="insights-list-title">Latest resources</h2>
-            <p>Deep dives you can hand to stakeholders when you need to justify the next move.</p>
+            <h2 id="insights-list-title">Deep dives</h2>
+            <p>Full articles you can hand to stakeholders when you need to justify the next move.</p>
           </div>
 
-          <div className="insights-grid">
+          <div className="insights-articles">
             {RESOURCES.map((resource) => (
               <article key={resource.id} id={resource.id} className="insight-article">
                 <div className="insight-article__meta">

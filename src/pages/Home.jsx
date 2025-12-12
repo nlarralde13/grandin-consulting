@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CTABand from "../components/CTABand.jsx";
 import CoverageLine from "../components/CoverageLine.jsx";
-import IPInfoCard from "../components/IPInfoCard.jsx";
 import { RESOURCES } from "../data/resources.js";
 import { TESTIMONIALS } from "../data/testimonials.js";
 import { CALENDLY_OR_FORM_URL, PHONE_NUMBER_DISPLAY, PHONE_NUMBER_TEL, RUNBOOK_PDF_URL } from "../config/siteMeta.js";
@@ -121,7 +120,6 @@ export default function Home() {
                   <span className="hero-resource-cta">Read now</span>
                 </Link>
               )}
-              <IPInfoCard />
             </div>
           </div>
         </div>

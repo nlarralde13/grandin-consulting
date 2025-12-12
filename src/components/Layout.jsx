@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Footer from "./Footer.jsx";
 import Header from "./Header.jsx";
+import NewsTicker from "./NewsTicker.jsx";
 import TopBar from "./TopBar.jsx";
 import { ORG_SCHEMA } from "../config/siteMeta.js";
 
@@ -39,6 +40,7 @@ export default function Layout() {
   return (
     <>
       <TopBar />
+      <NewsTicker />
       <Header />
       <Outlet />
       <Footer />

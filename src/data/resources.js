@@ -5,7 +5,7 @@ export const RESOURCES = [
     type: "Blog / Whitepaper",
     readTime: "8 min read",
     summary:
-      "Windows 10 support ends October 14, 2025. Waiting increases unpatched vulnerabilities, compliance headaches, and rushed migrations. Here is what staying put really means and why moving early matters.",
+      "Windows 10 support ended October 14, 2025. Waiting increases unpatched vulnerabilities, compliance headaches, and rushed migrations. Here is what staying put really means and why moving early matters.",
     highlights: [
       "Security patches stop after October 14, 2025, leaving new exploits unaddressed.",
       "Windows 11 enforces TPM 2.0, Secure Boot, and Virtualization-Based Security by design.",
