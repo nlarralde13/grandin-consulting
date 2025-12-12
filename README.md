@@ -71,7 +71,11 @@ Add the same key/value to Netlify (Site settings → Environment variables) or t
 
 ### Manual Linux Deployment (NGINX)
 
-The site is an SPA and can be hosted anywhere that serves static files. For a basic Ubuntu/Debian NGINX setup:
+The site is an SPA and can be hosted anywhere that serves static files. This repo also includes a small RSS proxy (`/api/rss`) required for the news ticker in production (browsers cannot fetch most RSS feeds directly due to CORS).
+
+Prereqs:
+- Node.js 18+ on the server (for the RSS proxy)
+- NGINX serving `dist/`
 
 1. **Build artifacts**
    ```bash
@@ -90,7 +94,47 @@ The site is an SPA and can be hosted anywhere that serves static files. For a ba
    sudo apt install nginx
    ```
 
-4. **Configure a server block** at `/etc/nginx/sites-available/grandin-consulting`:
+4. **Run the RSS proxy service**
+
+   The proxy listens on `127.0.0.1:8787` and allowlists the feed hosts used by the ticker.
+
+   - Start it manually (quick test):
+     ```bash
+     npm ci
+     npm run rss-proxy
+     ```
+
+   - Recommended: run it with systemd. Example unit file at `/etc/systemd/system/grandin-rss-proxy.service`:
+     ```
+     [Unit]
+     Description=Grandin Consulting RSS proxy
+     After=network.target
+
+     [Service]
+     WorkingDirectory=/var/www/grandin-consulting-app
+     ExecStart=/usr/bin/npm run rss-proxy
+     Restart=always
+     RestartSec=2
+     Environment=NODE_ENV=production
+     Environment=RSS_PROXY_HOST=127.0.0.1
+     Environment=RSS_PROXY_PORT=8787
+
+     [Install]
+     WantedBy=multi-user.target
+     ```
+     Notes:
+     - `WorkingDirectory` should point to where you deploy the repo (where `package.json` lives), not the static `dist/` folder.
+     - If your server uses a different `npm` path, adjust `ExecStart`.
+
+     Enable and start:
+     ```bash
+     sudo systemctl daemon-reload
+     sudo systemctl enable grandin-rss-proxy
+     sudo systemctl start grandin-rss-proxy
+     sudo systemctl status grandin-rss-proxy --no-pager
+     ```
+
+5. **Configure a server block** at `/etc/nginx/sites-available/grandin-consulting`:
    ```
    server {
      listen 80;
@@ -102,19 +146,28 @@ The site is an SPA and can be hosted anywhere that serves static files. For a ba
      location / {
        try_files $uri $uri/ /index.html;
      }
+
+     # RSS proxy for the news ticker (same-origin endpoint consumed by the browser)
+     location /api/rss {
+       proxy_pass http://127.0.0.1:8787;
+       proxy_http_version 1.1;
+       proxy_set_header Host $host;
+       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+       proxy_set_header X-Forwarded-Proto $scheme;
+     }
    }
    ```
 
    The `try_files` directive ensures client-side routes like `/testimonials` work on refresh.
 
-5. **Enable + reload**
+6. **Enable + reload**
    ```bash
    sudo ln -s /etc/nginx/sites-available/grandin-consulting /etc/nginx/sites-enabled/
    sudo nginx -t
    sudo systemctl reload nginx
    ```
 
-6. **HTTPS (recommended)**
+7. **HTTPS (recommended)**
    Use `certbot --nginx` or another ACME client to obtain certificates and add a `server` block listening on port 443.
 
 ### Updating a Linux Deployment
