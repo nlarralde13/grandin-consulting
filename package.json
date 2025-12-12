@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview --port 4173"
+    "preview": "vite preview --port 4173",
+    "rss-proxy": "node server/rss-proxy.mjs"
   },
   "dependencies": {
     "babel": "^5.8.38",
