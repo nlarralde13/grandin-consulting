@@ -72,25 +72,13 @@ function parseFeed(xmlText, sourceName) {
   }
 }
 
-async function fetchFeed(url, signal) {
-  const response = await fetch(url, { signal });
+async function fetchFeedWithFallback(url, signal) {
+  const proxyUrl = `/api/rss?url=${encodeURIComponent(url)}`;
+  const response = await fetch(proxyUrl, { signal });
   if (!response.ok) {
-    throw new Error(`Feed request failed: ${response.status}`);
+    throw new Error(`Feed proxy request failed: ${response.status}`);
   }
   return response.text();
-}
-
-async function fetchFeedWithFallback(url, signal) {
-  try {
-    return await fetchFeed(url, signal);
-  } catch (err) {
-    const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
-    const response = await fetch(proxyUrl, { signal });
-    if (!response.ok) {
-      throw err;
-    }
-    return response.text();
-  }
 }
 
 function interleaveRoundRobin(lists) {
